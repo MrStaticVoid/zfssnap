@@ -6,7 +6,7 @@ Instructions for my reference:
 ## Initial Backup
 1. On the destination host, create a place to send the backup to:
 
-        # zfs create nest/backup/nodes/rpool/<nodename>
+        # zfs create nest/backup/nodes/<nodename>
     
 1. On the source host, perform an initial backup:
 
@@ -16,17 +16,17 @@ Instructions for my reference:
     
     1. Perform a full backup:
     
-            # zfs send -R <snapshot from last step> | ssh root@hawk zfs receive -vdFu nest/backup/nodes/rpool/<nodename>
+            # zfs send -R <snapshot from last step> | ssh root@hawk zfs receive -vdFu nest/backup/nodes/<nodename>
 
 1. On the destination host, unset some received properties:
 
-        # zfs inherit -r mountpoint nest/backup/nodes/rpool/<nodename>
-        # zfs inherit -r com.sun:auto-snapshot nest/backup/nodes/rpool/<nodename>
+        # zfs inherit -r mountpoint nest/backup/nodes/<nodename>
+        # zfs inherit -r com.sun:auto-snapshot nest/backup/nodes/<nodename>
 
 ## New Dataset
 If you create a new dataset, it may be out-of-sync with the existing incremental backups and you will get an error message like:
 
-        cannot receive incremental stream: destination 'nest/backup/nodes/rpool/<nodename>/<new dataset>' does not exist
+        cannot receive incremental stream: destination 'nest/backup/nodes/<nodename>/<new dataset>' does not exist
 
 In this case, perform a full replication of the new dataset to bring it in line with the incremental stream.
 
@@ -40,9 +40,9 @@ In this case, perform a full replication of the new dataset to bring it in line 
 
 1. Perform the full replication of the new dataset:
 
-        # zfs send -R <new dataset>@<newest remote snapshot from last step> | ssh root@hawk zfs receive -vdFu nest/backup/nodes/rpool/<nodename>
+        # zfs send -R <new dataset>@<newest remote snapshot from last step> | ssh root@hawk zfs receive -vdFu nest/backup/nodes/<nodename>
 
 1. On the destination host, unset some received properties:
 
-        # zfs inherit -r mountpoint nest/backup/nodes/rpool/<nodename>
-        # zfs inherit -r com.sun:auto-snapshot nest/backup/nodes/rpool/<nodename>
+        # zfs inherit -r mountpoint nest/backup/nodes/<nodename>
+        # zfs inherit -r com.sun:auto-snapshot nest/backup/nodes/<nodename>
