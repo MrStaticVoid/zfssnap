@@ -20,7 +20,7 @@ Instructions for my reference:
 
 1. On the destination host, unset some received properties:
 
-        # zfs inherit -r canmount nest/backup/nodes/rpool/<nodename>
+        # zfs inherit -r mountpoint nest/backup/nodes/rpool/<nodename>
         # zfs inherit -r com.sun:auto-snapshot nest/backup/nodes/rpool/<nodename>
 
 ## New Dataset
@@ -44,5 +44,5 @@ In this case, perform a full replication of the new dataset to bring it in line 
 
 1. On the destination host, unset some received properties:
 
-        # zfs inherit -r canmount nest/backup/nodes/rpool/<nodename>
+        # zfs inherit -r mountpoint nest/backup/nodes/rpool/<nodename>
         # zfs inherit -r com.sun:auto-snapshot nest/backup/nodes/rpool/<nodename>
