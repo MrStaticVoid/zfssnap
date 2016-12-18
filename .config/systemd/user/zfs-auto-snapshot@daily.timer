@@ -1,8 +1,0 @@
-[Unit]
-Description=ZFS %I auto snapshot timer
-
-[Timer]
-OnCalendar=daily
-
-[Install]
-WantedBy=timers.target

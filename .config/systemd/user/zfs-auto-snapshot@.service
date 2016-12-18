@@ -1,9 +1,0 @@
-[Unit]
-Description=ZFS %I auto snapshot
-
-[Service]
-Environment=ZFS_SNAP_KEEP_frequent=4 ZFS_SNAP_KEEP_hourly=24 ZFS_SNAP_KEEP_daily=31 ZFS_SNAP_KEEP_weekly=8 ZFS_SNAP_KEEP_monthly=12
-Environment=PATH=%h/bin:/usr/sbin:/usr/bin:/sbin:/bin
-Type=oneshot
-ExecStart=/usr/bin/env zfs-auto-snapshot --verbose --label=%i --keep=${ZFS_SNAP_KEEP_%i} //
-SyslogIdentifier=zfs-auto-snapshot
