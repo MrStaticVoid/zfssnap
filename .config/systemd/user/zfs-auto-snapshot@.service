@@ -2,7 +2,7 @@
 Description=ZFS %I auto snapshot
 
 [Service]
-Environment=frequent=4 hourly=24 daily=31 weekly=8 monthly=12
+Environment=frequent=4 hourly=24 daily=31 weekly=8 monthly=12 PATH="${HOME}/bin:${PATH}"
 Type=oneshot
 ExecStart=/usr/bin/env zfs-auto-snapshot --label=%i --keep=${%i}
 SyslogIdentifier=zfs-auto-snapshot
